@@ -1,0 +1,63 @@
+#! /usr/bin/env bash
+#
+#  edit and run this script to update the run scripts for the pipeline
+#
+
+common="admit=0 dv=200 dw=200 restart=1 pix_list=1,2,3,4,6,7,8,9,10,11,12,13,14,15"
+common="admit=0 dv=200 dw=200 restart=1 extent=400"
+
+project="2018-S1-MU-64"
+
+# 85928 (2019-11-05) through 92188 (2020-03-06) have the wrong OFF
+# 92431 (2020-03-12) through 92787 (2020-03-19) should be ok
+
+# good ones
+on1="92431 92435 92439 92445 92449 92455 92459 92463 92469 92473 92542 92548 92554 92556 92560 92562 92566 92568 92572 92574 92578 92580 92584 92586 92590 92668 92670 92672 92674 92676 92684 92686 92692 92694 92698 92700 92702 92755 92761 92763 92765 92769 92771 92773 92777 92779 92781 92785 92787"
+# bad ones
+on1b=""
+
+obsnums="$on1 $on1b"
+
+
+#                       create the run file for single obsnum runs, also incoorporate any obsnum specific arguments
+job1=$project.run1
+job2=$project.run2
+rm -f $job1 $job2
+touch $job1 $job2
+for o in $obsnums ; do
+    if [ -e $o.args ]; then
+	args=$(cat $o.args)
+    fi
+    echo SLpipeline.sh obsnum=$o $extra $args >> $job1
+    args=""
+done
+
+#                       create the run file for combination runs
+
+echo SLpipeline.sh obsnums=$(echo $on1 | sed 's/ /,/g') srdp=1 >> $job2
+
+echo "Found $(cat $job1 | wc -l) single obsnums in $job1"
+echo "Found $(cat $job2 | wc -l) combinations in $job2"
+echo "Have fun running them."
+
+
+# there are 4 nights:
+
+# 92431
+# 92463 p5 is bad
+# 92473 it seemed ok - last one of 1st night
+
+# 2nd night:
+# 92542 - ij ok
+# 92590 last one, but it's bad
+
+# 3rd niht
+#92668 kind of ok
+#92702 bad
+
+# 4th night
+# 92755 5 is bad
+# 92787 ok
+
+# notable is that center of field has one pixel with much higher noise (0 or 10)
+
