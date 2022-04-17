@@ -3,18 +3,26 @@
 #  edit and run this script to update the run scripts for the pipeline
 #
 
-common="admit=0 dv=200 dw=200 restart=1 pix_list=1,2,3,4,6,7,8,9,10,11,12,13,14,15"
-common="admit=0 dv=200 dw=200 restart=1 extent=400"
+common="admit=0 dv=200 dw=200 restart=1 admit=0 extent=150"
+common="admit=0 dv=200 dw=200 restart=1 admit=0 extent=150 pix_list=0,1,2,3,4,6,7,8,9,10,11,12,13,14,15"
+common="admit=0 dv=200 dw=200 restart=1 admit=0 extent=150 pix_list=1,2,3,4,6,7,8,9,10,11"
 
 project="2018-S1-MU-64"
 
-# 85928 (2019-11-05) through 92188 (2020-03-06) have the wrong OFF
+# 85929 (2019-11-05) through 92188 (2020-03-06) have the wrong OFF
 # 92431 (2020-03-12) through 92787 (2020-03-19) should be ok
 
-# good ones
+# total 219
+# 49 good
+
+# good ones for the combination
 on1="92431 92435 92439 92445 92449 92455 92459 92463 92469 92473 92542 92548 92554 92556 92560 92562 92566 92568 92572 92574 92578 92580 92584 92586 92590 92668 92670 92672 92674 92676 92684 92686 92692 92694 92698 92700 92702 92755 92761 92763 92765 92769 92771 92773 92777 92779 92781 92785 92787"
-# bad ones
+
+# bad ones to be fully removed from final combination
 on1b=""
+
+# bad ones (with the wrong OFF)
+on0="85929 86054 86145 86147 86149 86151 86153 86155 86159 86161 86163 86165 86167 86169 86173 86175 86177 86179 86181 86183 86187 86189 86191 86193 86195 86197 86201 86203 86205 86298 86300 86302 86304 86306 86308 86312 86314 86316 86318 86320 86322 86326 86328 86330 86332 86334 86336 86340 86342 86344 86346 86348 86350 86354 86356 86358 86360 86362 86364 87501 87503 87505 87509 87511 87513 87515 87519 87521 87523 87525 87527 87531 87533 87535 87537 87539 87541 87545 87547 87549 87551 88194 88202 88204 88206 88208 88210 88212 88214 88216 88218 88220 88222 88228 88230 88232 88234 88236 88238 88240 88242 88244 88246 88252 88254 88256 88258 88260 88262 88264 88266 88268 88270 88272 88274 88343 88345 88347 88349 88351 88353 88355 88357 88359 88361 88363 88365 88367 88369 88371 88375 88377 88379 88381 88383 88385 88387 88389 88391 88393 88395 88397 88399 88401 88403 88405 88409 88411 88413 88415 88417 88419 88421 88423 88425 88427 88429 88431 88433 88435 92165 92168 92172 92173 92177 92178 92182 92183 92187 92188"
 
 obsnums="$on1 $on1b"
 
@@ -22,13 +30,21 @@ obsnums="$on1 $on1b"
 #                       create the run file for single obsnum runs, also incoorporate any obsnum specific arguments
 job1=$project.run1
 job2=$project.run2
-rm -f $job1 $job2
-touch $job1 $job2
+job3=$project.run3
+rm -f $job1 $job2 $job3
+touch $job1 $job2 $job3
 for o in $obsnums ; do
     if [ -e $o.args ]; then
 	args=$(cat $o.args)
     fi
-    echo SLpipeline.sh obsnum=$o $extra $args >> $job1
+    echo SLpipeline.sh obsnum=$o $common $args >> $job1
+    args=""
+done
+for o in $on0 ; do
+    if [ -e $o.args ]; then
+	args=$(cat $o.args)
+    fi
+    echo SLpipeline.sh obsnum=$o $common $args >> $job3
     args=""
 done
 
@@ -38,6 +54,7 @@ echo SLpipeline.sh obsnums=$(echo $on1 | sed 's/ /,/g') srdp=1 >> $job2
 
 echo "Found $(cat $job1 | wc -l) single obsnums in $job1"
 echo "Found $(cat $job2 | wc -l) combinations in $job2"
+echo "Found $(cat $job3 | wc -l) combinations in $job3"
 echo "Have fun running them."
 
 
@@ -61,3 +78,8 @@ echo "Have fun running them."
 
 # notable is that center of field has one pixel with much higher noise (0 or 10)
 
+# on1:   3175.28user 484.51system 6:14.16elapsed 978%CPU 
+#        2726.79user 278.95system 4:56.98elapsed 1012%CPU
+#        2272.95user 266.60system 4:18.61elapsed 981%CPU 
+# 21 mK in 49 maps with just beam5 removed
+# wih beams 0,5,12,13,14,15 removed (they are often bad) rms is 23 mK
