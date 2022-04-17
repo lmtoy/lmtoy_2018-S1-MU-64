@@ -1,11 +1,15 @@
 # 2018-S1-MU-64
 
-This project observed Sextans A in CO 
+This project observed Sextans A searching for CO.   The known VLSR is 315 km/s, with HI emission
+between 280 and 380 km/s. See e.g. https://arxiv.org/pdf/1804.07730.pdf
 
 ## OBSNUM
 
 A total of 49 science obsnum's were taken in the CO line (115.3 GHz).
-The good data were taken in a 4 night end sprint before Covid shut down the observatory.
+The good data were taken in a 4 night end sprint (March 12, 13, 18, 19) before Covid shut down the observatory.
+Each dataset integrated a 120 arcsec region in OTF sthyle for about 600 seconds. Beams 0,5,12,13,14,15 were
+often suspect. Individual inspection is needed. The final RMS in the combined map was about 21-23 mK, with no
+clear CO detection.
 
 More detailed descriptions are in the file **mk_runs**.
 
@@ -40,21 +44,21 @@ This command creates the run files (it uses the **mk_runs** scripts):
 
       make runs
 	  
-in this case just **m51.run1** and **m51.run2**
+in this case just **2018-S1-MU-64.run1** and **2018-S1-MU-64.run2**
 
 ### Running the pipeline
 
 
 With [SLURM](https://slurm.schedmd.com/documentation.html) this is the way:
 
-      sbatch_lmtoy m51.run1
+      sbatch_lmtoy 2018-S1-MU-64.run1
       # wait for it to finish
-      sbatch_lmtoy m51.run2
+      sbatch_lmtoy 2018-S1-MU-64.run2
 
 whereas with [Gnu Parallel](https://www.gnu.org/software/parallel/)
 
-      parallel --jobs 16 m51.run1
-      parallel --jobs 16 m51.run2
+      parallel --jobs 16 2018-S1-MU-64.run1
+      parallel --jobs 16 2018-S1-MU-64.run2
 
 can be submitted in a shell as the seond one will wait until the first one has finished
 all pipeline calls. On "lma" this takes about 30 minutes to process all single obsnums
@@ -63,21 +67,10 @@ all pipeline calls. On "lma" this takes about 30 minutes to process all single o
 If you have no good parallel/batch processing available, the slow and trusted way is
 via your [unix shell](https://www.gnu.org/software/bash/):
 
-      bash m51.run1
-      bash m51.run2
+      bash 2018-S1-MU-64.run1
+      bash 2018-S1-MU-64.run2
 
-but this will take a while of course (5:04 hours on "lma"):
-
-### Alternate ProjectId's
-
-For the M51 project by accident the ProjectId during one night (2020-02-13, see **lmtinfo.log**)
-was given the wrong name. In addition one pointing observation was stored under
-2018S1SEQUOIACommissioning.
-
-It may in fact be diserable to add certain pointing observations to the dataset, to confirm
-that pointing was optimal. most (all?) osbervations have (or should have) a regular pointing done
-before, maybe during, and after an observation. In theory one could use a cross-correlatoin
-technique to convince oneselves that the data are safe to stack.  *we will be looking into this*
+but this will take a while of course.
 
 
 ## Files:
@@ -86,8 +79,8 @@ technique to convince oneselves that the data are safe to stack.  *we will be lo
 Description of the file that should be in this directory
 
 
-      lmtinfo.log     logfile from lmtinfo.py on all relevant science observations
-      mk_runs         script to make the run files
-      m51.run1        created by mk_runs
-      m51.run2        created by mk_runs
-      2018-S1-MU-64/  (optional) directory with pipeline results, otherwise in $WORK_LMT
+      lmtinfo.log               logfile from lmtinfo.py on all relevant science observations
+      mk_runs                   script to make the run files
+      2018-S1-MU-64.run1        created by mk_runs
+      2018-S1-MU-64.run2        created by mk_runs
+      2018-S1-MU-64/            (optional) directory with pipeline results, otherwise in $WORK_LMT
