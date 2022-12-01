@@ -14,7 +14,7 @@ help:
 
 
 runs:
-	./mk_runs
+	./mk_runs.py
 
 
 summary:
