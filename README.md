@@ -7,10 +7,12 @@ between 280 and 380 km/s. See e.g. https://arxiv.org/pdf/1804.07730.pdf
 
 A total of 49 science obsnum's were taken in the CO line (115.3 GHz).
 The good data were taken in a 4 night end sprint (March 12, 13, 18, 19) before Covid shut down the observatory.
-Each dataset integrated a 120 arcsec region in OTF sthyle for about 600 seconds. Beams 0,5,12,13,14,15 were
+Each dataset integrated a 120 arcsec region in OTF style for about 600 seconds. Beams 0,5,12,13,14,15 were
 often suspect. Individual inspection is needed. The final RMS in the combined map was about 21-23 mK, with no
 clear CO detection.
 
-More detailed descriptions are in the file **mk_runs.py**.
+Earlier obsnum's  (85929..92188) were using the wrong OFF position (0,0) - and thus are "useless", except
+it could be used as a bootstrap comparison with the 49 correct OFF positions.
 
+More detailed descriptions are in the file **mk_runs.py**.
 
