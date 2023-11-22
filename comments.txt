@@ -39,7 +39,7 @@
 92586			      # pix_list=-0,-5
 92590 			      # pix_list=-0,-1,-5,-14
 92668 lots bad 		      # pix_list=-0,-1,-3,-5,-6,-7
-92670 ALL BAD
+92670 QAFAIL
 92672			      # pix_list=-1,-5
 92674			      # pix_list=-1,-5
 92676			      # pix_list=-1,-5,-14
@@ -54,7 +54,7 @@
 92755 =Night-4		      # pix_list=-0,-5
 92761 ok?		      # pix_list=-0,-5,-6
 92763 ok?
-92765 ALL BAD
+92765 QAFAIL
 92769		              # pix_list=-5,-6	
 92771			      # pix_list=-5
 92773			      # pix_list=-0,-1,-5,-14
