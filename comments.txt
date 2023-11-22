@@ -1,8 +1,16 @@
-85929 bad OFF (first one)
-92177 bad OFF
-92178 bad OFF
-92188 bad OFF (last one)
-#
+#   decent data (no doppler issue), but with the wrong OFF
+92165 odd large field in south     # pix_list=-5
+92168 wrong OFF                    # pix_list=-5
+92172 wrong OFF    		   # pix_list=-5
+92173 wrong OFF    		   # pix_list=-5
+92177 wrong OFF    		   # pix_list=-5
+92178 wrong OFF    		   # pix_list=-5
+92182 wrong OFF    		   # pix_list=-0,5
+92183 wrong OFF    		   # pix_list=-0,5
+92187 wrong OFF    		   # pix_list=-0,5
+92188 wrong OFF (last one)   	   # pix_list=-0,5
+
+#   good ones with the correct OFF
 92431 =Night-1                # pix_list=-5,-14
 92435 			      # pix_list=-5
 92439			      # pix_list=-5,-14
@@ -59,7 +67,7 @@
 92431_92787  best combo
 
 # notable is that center of field has one pixel with much higher noise (0 or 10)
-85929 wrong OFF
+85929 wrong OFF (first one)
 86054 wrong OFF
 86145 wrong OFF
 86147 wrong OFF
@@ -218,14 +226,4 @@
 88429 wrong OFF
 88431 wrong OFF
 88433 wrong OFF
-88435 wrong OFF
-92165 wrong OFF
-92168 wrong OFF
-92172 wrong OFF
-92173 wrong OFF
-92177 wrong OFF
-92178 wrong OFF
-92182 wrong OFF
-92183 wrong OFF
-92187 wrong OFF
-92188 wrong OFF
+88435 last w/ doppler issue
