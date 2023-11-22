@@ -63,8 +63,6 @@
 92781			      # pix_list=-0,-5
 92785			      # pix_list=-0,-1,-5,-14
 92787 			      # pix_list=-0,-1,-5,-14
-#
-92431_92787  best combo
 
 # notable is that center of field has one pixel with much higher noise (0 or 10)
 85929 wrong OFF (first one)
@@ -227,3 +225,8 @@
 88431 wrong OFF
 88433 wrong OFF
 88435 last w/ doppler issue
+
+# combo's
+85929_92188   complete bogus
+92165_92188   wrong sky off
+92431_92787   best combo
