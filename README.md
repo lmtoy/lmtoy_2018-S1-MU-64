@@ -21,3 +21,5 @@ More detailed descriptions are in the file **mk_runs.py**.
 
 First Detection of Molecular Gas in the Giant Low Surface Brightness Galaxy Malin 1 -
 https://iopscience.iop.org/article/10.3847/2041-8213/ad8656
+
+They found 143 (+/-41) mJy km/s
